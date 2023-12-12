@@ -9,9 +9,11 @@ async function main() {
   console.log("deployed code", deployedCode);
   console.log(await helloWorld.hi());
 
-  // console.log(`deployed helloWorld: ${helloWorld}`);
-  // console.log(`deployed to ${helloWorld.getAddress()}`);
-  // console.log(`function called: ${helloWorld.hi()}`);
+  const Manager = await ethers.getContractFactory("Manager");
+  const manager = await Manager.deploy(helloWorld.getAddress());
+
+  console.log("manager contract deployed:", manager);
+  console.log(await manager.doStuff());
 }
 
 // We recommend this pattern to be able to use async/await everywhere
